@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>arquillian-example</groupId>
+  <artifactId>arquillian-example</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+      <dependency>
+        <groupId>org.jboss.arquillian.junit</groupId>
+        <artifactId>arquillian-junit-core</artifactId>
+        <version>1.5.0.Final</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.arquillian.container</groupId>
+        <artifactId>arquillian-container-test-api</artifactId>
+        <version>1.4.1.Final</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.spec</groupId>
+        <artifactId>jboss-javaee-7.0</artifactId>
+        <version>1.1.1.Final</version>
+        <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.arquillian</groupId>
+        <artifactId>arquillian-bom</artifactId>
+        <version>1.4.1.Final</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.arquillian.junit</groupId>
+        <artifactId>arquillian-junit-container</artifactId>
+        <version>1.4.1.Final</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.wildfly.extras.creaper</groupId>
+        <artifactId>creaper-core</artifactId>
+        <version>1.6.1</version>
+      </dependency>
+      <dependency>
+        <groupId>io.undertow</groupId>
+        <artifactId>undertow-core</artifactId>
+        <version>2.0.28.Final</version>
+      </dependency>
+
+      <!-- arquilllian containers -->
+      <dependency>
+        <groupId>org.arquillian.container</groupId>
+        <artifactId>arquillian-chameleon-testng-container-starter</artifactId>
+        <version>1.0.0.CR6</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.arquillian.container</groupId>
+        <artifactId>arquillian-chameleon-junit-container-starter</artifactId>
+        <version>1.0.0.CR6</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.arquillian.container</groupId>
+        <artifactId>arquillian-container-chameleon-runner</artifactId>
+        <version>1.0.0.CR6</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.arquillian.container</groupId>
+        <artifactId>arquillian-chameleon-maven-build-deployment</artifactId>
+        <version>1.0.0.CR6</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.wildfly.common</groupId>
+        <artifactId>wildfly-common</artifactId>
+        <version>1.5.0.Final</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+
+    <build>
+      <finalName>${project.artifactId}</finalName>
+      <plugins>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>3.1.1</version>
+
+          <configuration>
+            <descriptorRefs>
+              <descriptorRef>jar-with-dependencies</descriptorRef>
+            </descriptorRefs>
+          </configuration>
+
+          <executions>
+            <execution>
+              <id>make-assembly</id>
+              <phase>package</phase>
+              <goals>
+                <goal>single</goal>
+              </goals>
+            </execution>
+          </executions>
+
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <configuration>
+            <archive>
+              <manifestEntries>
+                <Dependencies>org.keycloak.keycloak-services</Dependencies>
+              </manifestEntries>
+            </archive>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <executions>
+            <execution>
+              <id>attach-sources</id>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.5.3</version>
+        </plugin>
+      </plugins>
+    </build>
+
+  </project>
