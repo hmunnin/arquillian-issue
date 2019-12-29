@@ -9,12 +9,11 @@
         <property name="deploymentExportPath">target/deployments</property>
     </engine>
 
-    <container qualifier="chameleon" default="true">
+    <container qualifier="wildfly-embedded" default="true">
         <configuration>
-            <property name="chameleonTarget">jboss as:7.1.1.Final:managed</property>
+            <property name="jbossHome">${jboss.home}</property>
+            <property name="port">9090</property>
             <property name="allowConnectingToRunningServer">true</property>
-            <property name="username">admin</property>
-            <property name="password">admin</property>
         </configuration>
     </container>
 
